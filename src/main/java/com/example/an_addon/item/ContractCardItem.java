@@ -87,13 +87,28 @@ public class ContractCardItem extends Item {
         tooltip.add(Component.literal(
                 data.base().getDisplayName() + "（ベース）／"
                         + data.element().getDisplayName() + "（属性）").withStyle(ChatFormatting.AQUA));
-        tooltip.add(Component.literal("Tier " + data.tier() + "  Lv " + data.level())
+        tooltip.add(Component.literal(
+                        "Tier " + data.tier() + "  Lv " + data.level() + " / " + data.levelCap())
                 .withStyle(ChatFormatting.GOLD));
-        tooltip.add(Component.literal(data.level() < SummonData.LEVEL_CAP
-                ? "EXP " + data.exp() + " / " + data.expToNext()
-                : "EXP -- (上限)").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal(data.isAtCap()
+                ? "EXP -- (上限)"
+                : "EXP " + data.exp() + " / " + data.expToNext()).withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal("関係値 " + data.relationship() + " / 100")
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
+
+        if (data.isAtCap()) {
+            String hint;
+            if (data.canEvolve() && data.canBreakthrough()) {
+                hint = "上限到達: 祭壇で 進化石 / 限界突破の証 が使える";
+            } else if (data.canEvolve()) {
+                hint = "上限到達: 祭壇で 進化石 が使える";
+            } else if (data.canBreakthrough()) {
+                hint = "上限到達: 祭壇で 限界突破の証 が使える";
+            } else {
+                hint = "上限到達: これ以上は伸びない";
+            }
+            tooltip.add(Component.literal(hint).withStyle(ChatFormatting.YELLOW));
+        }
 
         List<AbilityId> unlocked = AbilityTable.unlocked(data.base(), data.level());
         if (!unlocked.isEmpty()) {
