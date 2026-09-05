@@ -185,9 +185,10 @@ public class SummonEntity extends PathfinderMob implements OwnableEntity, Player
 
     private void applyStats() {
         int lv = summonData.level();
-        double tierBonus = (summonData.tier() - 1) * 19;
-        double hp = 20.0D + (lv - 1 + tierBonus) * 1.5D;
-        double atk = 3.0D + (lv - 1 + tierBonus) * 0.35D;
+        // ティアは倍率で効かせる。T1 1.00 / T2 1.25 / T3 1.50 / T4 1.75 / T5 2.00
+        double tierMul = 1.0D + (summonData.tier() - 1) * 0.25D;
+        double hp = (20.0D + (lv - 1) * 1.5D) * tierMul;
+        double atk = (3.0D + (lv - 1) * 0.35D) * tierMul;
         double jump = hasAbility(AbilityId.HIGH_JUMP) ? 1.05D : 0.7D;
 
         if (this.getAttribute(Attributes.MAX_HEALTH) != null) {
@@ -236,7 +237,7 @@ public class SummonEntity extends PathfinderMob implements OwnableEntity, Player
             }
         } else if (AddonConfig.SHOW_EXP_GAIN.get()) {
             player.displayClientMessage(Component.literal(
-                    "+" + amount + " EXP  (" + summonData.exp() + "/" + summonData.expToNext() + ")"), true);
+                    "+" + amount + " EXP (" + summonData.exp() + "/" + summonData.expToNext() + ")"), true);
         }
     }
 
@@ -429,12 +430,6 @@ public class SummonEntity extends PathfinderMob implements OwnableEntity, Player
         return hasAbility(AbilityId.MAGMA_RESIST) || super.fireImmune();
     }
 
-    @Override
-    public boolean isInLava() {
-        // 溶岩泳ぎ持ちは溶岩でも沈まず泳げる扱いにする
-        return super.isInLava();
-    }
-
     // ================= 当たり判定 =================
 
     @Override
@@ -482,7 +477,7 @@ public class SummonEntity extends PathfinderMob implements OwnableEntity, Player
                 player.displayClientMessage(Component.literal(
                         getSyncedBase().isRideable()
                                 ? "Lv" + SummonData.RELEASE_LEVEL + " で騎乗が解放される"
-                                : getSyncedBase().getDisplayName() + " には乗れない"), true);
+                                : getSyncedBase().getDisplayName() + " には騎乗できない"), true);
             }
             return InteractionResult.CONSUME;
         }
@@ -663,7 +658,7 @@ public class SummonEntity extends PathfinderMob implements OwnableEntity, Player
             }
             if (AddonConfig.SHOW_STATE_MESSAGE.get()) {
                 player.displayClientMessage(Component.literal(
-                        summonData.base().getDisplayName() + " が送還された"), true);
+                        summonData.base().getDisplayName() + " が倒れた（関係値 -10）"), true);
             }
         }
         super.die(source);

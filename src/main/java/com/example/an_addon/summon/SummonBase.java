@@ -5,8 +5,11 @@ import net.minecraft.util.StringRepresentable;
 
 public enum SummonBase implements StringRepresentable {
     // id, 表示名, 騎乗可, 憑依可, 騎乗速度係数
-    SLIME("slime", "スライム", true, false, 0.45F),
-    BEAST("beast", "獣", true, false, 0.62F),
+    // 係数は移動速度属性 0.30 に掛かる。実効値の目安:
+    //   獣 0.150 / スライム 0.120 / 岩 0.102
+    //   （プレイヤー歩行 0.10、ダッシュ 0.13、馬 0.11〜0.34）
+    SLIME("slime", "スライム", true, false, 0.40F),
+    BEAST("beast", "獣", true, false, 0.50F),
     ROCK("rock", "岩", true, false, 0.34F),
     LAMP("lamp", "灯", false, true, 0.40F),
     BONE("bone", "骨", false, true, 0.40F);

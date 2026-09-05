@@ -80,8 +80,8 @@ public class SummonCommands {
                                             d.base().getDisplayName() + "/" + d.element().getDisplayName()
                                                     + " T" + d.tier() + " Lv" + d.level()
                                                     + " EXP " + d.exp() + "/" + d.expToNext()
-                                                    + " 関係値 " + d.relationship()
-                                                    + " 憑依中=" + d.possessing()
+                                                    + " 関係値=" + d.relationship()
+                                                    + " 憑依=" + d.possessing()
                                                     + " 能力=" + abilities
                                                     + " 札同期=" + s.syncToCard()), false);
                                 })))
