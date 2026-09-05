@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:paper" },
+    { "item": "minecraft:amethyst_shard" }
+  ],
+  "result": { "id": "an_addon:blank_contract_card", "count": 1 }
+}

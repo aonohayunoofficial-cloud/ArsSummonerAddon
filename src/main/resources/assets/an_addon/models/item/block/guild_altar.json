@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "minecraft:block/enchanting_table_top",
+    "side": "minecraft:block/enchanting_table_side",
+    "bottom": "minecraft:block/enchanting_table_bottom"
+  }
+}

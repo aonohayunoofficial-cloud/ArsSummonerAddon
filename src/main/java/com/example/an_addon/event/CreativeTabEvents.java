@@ -15,6 +15,8 @@ public class CreativeTabEvents {
     public static void addItems(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModRegistry.CONTRACT_CARD.get());
+            event.accept(ModRegistry.BLANK_CONTRACT_CARD.get());
+            event.accept(ModRegistry.GUILD_ALTAR_ITEM.get());
         }
     }
 }

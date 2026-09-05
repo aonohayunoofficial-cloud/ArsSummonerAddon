@@ -4,6 +4,8 @@
 
 	"item.an_addon.star_hat": "Example hat",
 	"item.an_addon.contract_card": "Contract Card",
+	"item.an_addon.blank_contract_card": "Blank Contract Card",
+	"block.an_addon.guild_altar": "Guild Altar",
 	"entity.an_addon.summon": "Summon"
 
 }

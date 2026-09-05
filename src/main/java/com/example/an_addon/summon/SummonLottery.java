@@ -39,7 +39,7 @@ public final class SummonLottery {
         SummonBase base = pick(BASE_WEIGHTS, random, SummonBase.SLIME);
         SummonElement element = pick(ELEMENT_WEIGHTS, random, SummonElement.NONE);
         int tier = rollTier(random);
-        return SummonData.expForLevel()
+        return SummonData.DEFAULT
                 .withBaseElement(base, element)
                 .withTier(tier);
     }

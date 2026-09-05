@@ -90,6 +90,12 @@ public record SummonData(
         return withLevelExp(Math.max(1, Math.min(LEVEL_CAP, newLevel)), 0);
     }
 
+    public SummonData withTier(int newTier) {
+        return new SummonData(base, element,
+                Math.max(1, Math.min(5, newTier)),
+                level, exp, relationship, possessing, entityId, dataVersion);
+    }
+
     public boolean canRide() {
         return level >= RELEASE_LEVEL && base.isRideable();
     }

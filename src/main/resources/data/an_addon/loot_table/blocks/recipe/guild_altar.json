@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [ "ABA", "ACA", "DDD" ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "B": { "item": "minecraft:book" },
+    "C": { "item": "minecraft:gold_ingot" },
+    "D": { "item": "minecraft:polished_deepslate" }
+  },
+  "result": { "id": "an_addon:guild_altar", "count": 1 }
+}
