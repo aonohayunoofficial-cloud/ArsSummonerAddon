@@ -6,6 +6,7 @@
 	"item.an_addon.contract_card": "Contract Card",
 	"item.an_addon.blank_contract_card": "Blank Contract Card",
 	"block.an_addon.guild_altar": "Guild Altar",
+	"item.an_addon.evolution_stone": "Evolution Stone",
+	"item.an_addon.breakthrough_token": "Breakthrough Token",
 	"entity.an_addon.summon": "Summon"
-
 }

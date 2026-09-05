@@ -75,6 +75,8 @@ public class ModRegistry {
     public static final DeferredHolder<Item, Item> BLANK_CONTRACT_CARD;
     public static final DeferredHolder<Block, Block> GUILD_ALTAR;
     public static final DeferredHolder<Item, Item> GUILD_ALTAR_ITEM;
+    public static final DeferredHolder<Item, Item> EVOLUTION_STONE;
+    public static final DeferredHolder<Item, Item> BREAKTHROUGH_TOKEN;
 
     //this is an example of how to register a sound. You also need to add the sound to the sound.json file, referencing your ogg files, and a texture for the button under textures/sounds.
     public static DeferredHolder<SoundEvent, SoundEvent> EXAMPLE_FAMILY =
@@ -95,6 +97,10 @@ public class ModRegistry {
                         .lightLevel(s -> 7)));
         GUILD_ALTAR_ITEM = ITEMS.register("guild_altar",
                 () -> new BlockItem(GUILD_ALTAR.get(), new Item.Properties()));
+        EVOLUTION_STONE = ITEMS.register("evolution_stone",
+                () -> new Item(new Item.Properties()));
+        BREAKTHROUGH_TOKEN = ITEMS.register("breakthrough_token",
+                () -> new Item(new Item.Properties()));
     }
 
     static SoundEvent makeSound(@NotNull String name) {

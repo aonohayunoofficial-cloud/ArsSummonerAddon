@@ -17,6 +17,8 @@ public class CreativeTabEvents {
             event.accept(ModRegistry.CONTRACT_CARD.get());
             event.accept(ModRegistry.BLANK_CONTRACT_CARD.get());
             event.accept(ModRegistry.GUILD_ALTAR_ITEM.get());
+            event.accept(ModRegistry.EVOLUTION_STONE.get());
+            event.accept(ModRegistry.BREAKTHROUGH_TOKEN.get());
         }
     }
 }

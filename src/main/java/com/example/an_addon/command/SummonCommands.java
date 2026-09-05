@@ -36,7 +36,7 @@ public class SummonCommands {
                                         .executes(ctx -> forEachSummon(ctx.getSource(),
                                                 s -> s.grantExp(IntegerArgumentType.getInteger(ctx, "amount"))))))
                         .then(Commands.literal("level")
-                                .then(Commands.argument("level", IntegerArgumentType.integer(1, 20))
+                                .then(Commands.argument("level", IntegerArgumentType.integer(1, 40))
                                         .executes(ctx -> {
                                             int lv = IntegerArgumentType.getInteger(ctx, "level");
                                             return forEachSummon(ctx.getSource(), s -> {
