@@ -39,18 +39,24 @@ public class GuildAltarBlock extends Block {
             return ItemInteractionResult.SUCCESS;
         }
 
+        // 契約済みの札は再契約しない。上限到達なら進化・限界突破の分岐へ入る
         if (card) {
             SummonData data = stack.get(ModRegistry.SUMMON_DATA.get());
-            if (data != null && data.isAtCap()) {
-                return handleCapBranch((ServerLevel) level, pos, player, stack, data);
-            }
-            if (data != null && data.level() > 1) {
-                player.displayClientMessage(Component.literal(
-                        "Lv2以上の契約は打ち直せない（Lv" + data.levelCap() + " で分岐に進む）"), true);
+            if (data == null) {
+                player.displayClientMessage(Component.literal("この札は壊れている"), true);
                 return ItemInteractionResult.SUCCESS;
             }
+            if (data.isAtCap()) {
+                return handleCapBranch((ServerLevel) level, pos, player, stack, data);
+            }
+            player.displayClientMessage(Component.literal(
+                    "契約済み: " + data.base().getDisplayName()
+                            + " Lv" + data.level() + "/" + data.levelCap()
+                            + "（上限で進化・限界突破が選べる）"), true);
+            return ItemInteractionResult.SUCCESS;
         }
 
+        // 白紙の札からの新規契約。ティアは常に T1
         SummonData rolled = SummonLottery.roll(level.getRandom());
         ItemStack result = new ItemStack(ModRegistry.CONTRACT_CARD.get());
         result.set(ModRegistry.SUMMON_DATA.get(), rolled);
@@ -108,11 +114,8 @@ public class GuildAltarBlock extends Block {
         return ItemInteractionResult.SUCCESS;
     }
 
-    /** インベントリ全スロットから1個消費する。見つからなければ false */
+    /** インベントリ全スロットから1個消費する。クリエイティブでも消費する */
     private static boolean consume(Player player, Item item) {
-        if (player.isCreative()) {
-            return findIndex(player.getInventory(), item) >= 0;
-        }
         int idx = findIndex(player.getInventory(), item);
         if (idx < 0) return false;
         player.getInventory().removeItem(idx, 1);

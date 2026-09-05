@@ -27,21 +27,16 @@ public final class SummonLottery {
         ELEMENT_WEIGHTS.put(SummonElement.DARK,  10);
     }
 
-    /** T1 70% / T2 25% / T3 5% */
-    public static int rollTier(RandomSource random) {
-        int r = random.nextInt(100);
-        if (r < 70) return 1;
-        if (r < 95) return 2;
-        return 3;
-    }
-
+    /**
+     * 新規契約はティア固定で T1。ティアは進化でのみ上がる。
+     * 抽選で決まるのはベースと属性のみ。
+     */
     public static SummonData roll(RandomSource random) {
         SummonBase base = pick(BASE_WEIGHTS, random, SummonBase.SLIME);
         SummonElement element = pick(ELEMENT_WEIGHTS, random, SummonElement.NONE);
-        int tier = rollTier(random);
         return SummonData.DEFAULT
                 .withBaseElement(base, element)
-                .withTier(tier);
+                .withTier(1);
     }
 
     private static <T> T pick(Map<T, Integer> weights, RandomSource random, T fallback) {
